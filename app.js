@@ -252,12 +252,12 @@ function renderHoQ() {
     // Base Y is the bottom of the SVG viewbox
     const BASE_Y = ROOF_H;
 
-    // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Matches corrected HOQ roof screenshot.
-    // Main triangle (j<=9): red = delete plus, green = add plus. Right edge (col 10): 6 minus, 1 plus (6,10), 3 minus.
+    // Roof: (i,j). Columns = bottom to top (0..10), rows = left to right. Col c row r: for c, diamonds (0,c)..(c-1,c),(c,c+1)..(c,10); row 1 = (0,c).
+    // Col 2: row 4 + (2,4); remove row 5 (2,5); row 8,9 + (2,8),(2,9); remove row 7 (2,7). Col 5 row 1,2 + (0,5),(1,5). Col 7 row 1 + (0,7).
     const roofPlus = new Set([
-        '0,2', '0,3', '1,3', '2,3', '3,4',  // kept from original
-        '1,6', '1,8', '1,9', '3,9', '4,8', '4,9', '5,6', '5,7', '5,8', '5,9', '6,7', '6,8',  // green (add)
-        '6,10'  // right edge
+        '0,2', '0,3', '0,5', '0,7', '1,3', '1,5', '2,3', '2,4', '2,8', '2,9', '3,4',
+        '1,6', '1,8', '1,9', '3,9', '4,8', '4,9', '5,6', '5,7', '5,8', '5,9', '6,7', '6,8',
+        '6,10'
     ]);
     const roofMinus = new Set([
         '0,10', '1,10', '2,10', '3,10', '4,10', '5,10',
