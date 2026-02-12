@@ -240,6 +240,18 @@ section {
     color: #fff;
 }
 
+.rank-low {
+    color: #888;
+}
+
+.dt-row-secondary {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.dt-row-secondary .rank-low {
+    color: #666;
+}
+
 /* Charts */
 .chart-box {
     width: 100%;

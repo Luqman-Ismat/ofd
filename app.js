@@ -25,14 +25,14 @@ function initVOCChart() {
         },
         yAxis: {
             type: 'category',
-            data: ['Price', 'Sound', 'Voice Rec', 'Setup', 'Connectivity', 'Volume', 'Design'],
+            data: ['Price', 'Sound', 'Voice Rec', 'Setup', 'Proper Func', 'Connectivity', 'Volume', 'Design', 'Compact', 'Lightweight', 'Color'],
             axisLabel: { color: '#ddd' }
         },
         series: [
             {
                 name: 'Rank Score',
                 type: 'bar',
-                data: [11, 10, 9, 8, 6, 5, 4],
+                data: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
                 itemStyle: { color: '#D4FF00' },
                 barWidth: '50%'
             }
