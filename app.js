@@ -252,11 +252,12 @@ function renderHoQ() {
     // Base Y is the bottom of the SVG viewbox
     const BASE_Y = ROOF_H;
 
-    // Roof: (i,j). Columns = bottom to top (0..10), rows = left to right. Col c row r: for c, diamonds (0,c)..(c-1,c),(c,c+1)..(c,10); row 1 = (0,c).
-    // Col 2: row 4 + (2,4); remove row 5 (2,5); row 8,9 + (2,8),(2,9); remove row 7 (2,7). Col 5 row 1,2 + (0,5),(1,5). Col 7 row 1 + (0,7).
+    // Roof: (i,j). User: row 1 = left edge of leftmost header (i=0); col 1 = top edge of first header (our col 0).
+    // So user col c = our column (c-1). Column c diamonds left-to-right: (0,c), (1,c), .. (c-1,c), (c,c+1), .. (c,10); row r = r-th = (r-1, c) for r<=c else (c, c+r-c).
+    // Col 2 (our 1): row 4 + (1,4), row 8,9 + (1,8),(1,9); remove row 5,7 (1,5),(1,7). Col 5 (our 4): row 1,2 + (0,4),(1,4). Col 7 (our 6): row 1 + (0,6).
     const roofPlus = new Set([
-        '0,2', '0,3', '0,5', '0,7', '1,3', '1,5', '2,3', '2,4', '2,8', '2,9', '3,4',
-        '1,6', '1,8', '1,9', '3,9', '4,8', '4,9', '5,6', '5,7', '5,8', '5,9', '6,7', '6,8',
+        '0,2', '0,3', '0,4', '0,6', '1,3', '1,4', '1,6', '1,8', '1,9', '2,3', '3,4',
+        '3,9', '4,8', '4,9', '5,6', '5,7', '5,8', '5,9', '6,7', '6,8',
         '6,10'
     ]);
     const roofMinus = new Set([
