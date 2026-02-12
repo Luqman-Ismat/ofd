@@ -19,12 +19,13 @@
     <!-- Sticky Navigation -->
     <nav class="sticky-nav">
         <div class="nav-logo">QFD // 2026</div>
-        <ul class="nav-links">
+            <ul class="nav-links">
             <li><a href="#hero">00 // INTRO</a></li>
             <li><a href="#cust-reqs">01 // CUSTOMER</a></li>
             <li><a href="#competitors">02 // MARKET</a></li>
             <li><a href="#hoq-section">03 // HOQ ANALYSIS</a></li>
-            <li><a href="#recommendations">04 // STRATEGY</a></li>
+            <li><a href="#challenges">04 // CHALLENGES</a></li>
+            <li><a href="#recommendations">05 // STRATEGY</a></li>
         </ul>
         <div class="nav-progress"></div>
     </nav>
@@ -43,8 +44,11 @@
                 <div class="hero-meta">
                     <h2>Quality Function Deployment: Amazon Echo Dot</h2>
                     <p class="summary-text">
-                        A comprehensive engineering analysis translating subjective Voice of Customer (VOC) data into
-                        quantifiable technical design objectives using the House of Quality methodology.
+                        This report reviews the <strong>Amazon Echo Dot (4th generation)</strong> and applies QFD to
+                        define design objectives for a <strong>5th generation</strong> concept. We translate Voice of
+                        Customer (VOC) data into quantifiable technical requirements using the House of Quality
+                        methodology—even though a 5th gen model now exists, our analysis and recommendations are
+                        grounded in 4th gen benchmarking and align with real changes Amazon implemented in the 5th gen.
                     </p>
                     <div class="team-list">
                         <span>Paola Salinas Gil</span>
@@ -68,9 +72,10 @@
                 <div class="text-col">
                     <h3>Methodology</h3>
                     <p>
-                        We collected customer feedback by randomly selecting reviews (N=XX) from Amazon’s website,
-                        spanning 1-5 star ratings. This qualitative data was synthesized into distinct customer needs
-                        and ranked by frequency and importance.
+                        We collected customer feedback by randomly selecting reviews of the <strong>Echo Dot (4th gen)</strong>
+                        from Amazon’s website, spanning 1–5 star ratings. This qualitative data was synthesized into
+                        distinct customer needs and ranked by frequency and importance to inform design targets for a
+                        <strong>5th generation</strong> Echo Dot.
                     </p>
 
                     <div class="data-table-styled">
@@ -129,7 +134,7 @@
                 <!-- Amazon -->
                 <div class="comp-card expanded">
                     <div class="comp-header">
-                        <h3>AMAZON ECHO DOT</h3>
+                        <h3>AMAZON ECHO DOT (4TH GEN)</h3>
                         <span class="price-tag">$49.99</span>
                     </div>
                     <div class="comp-specs">
@@ -278,12 +283,50 @@
             </div>
         </section>
 
-        <!-- SECTION 04: RECOMMENDATIONS -->
-        <section id="recommendations" class="content-section">
+        <!-- SECTION 04: CHALLENGES FACED -->
+        <section id="challenges" class="content-section">
             <div class="section-header">
                 <span class="section-index">04</span>
+                <h2>CHALLENGES FACED</h2>
+            </div>
+            <p class="challenges-intro">
+                Several challenges were encountered during the development of the QFD matrix and the translation of
+                customer needs into technical requirements.
+            </p>
+            <ul class="challenges-list">
+                <li>
+                    <strong>Subjectivity in relationship scoring:</strong> Assigning strengths (strong / moderate / weak)
+                    between customer needs and technical requirements involved engineering judgment, which introduces
+                    potential bias.
+                </li>
+                <li>
+                    <strong>Quantifying qualitative customer needs:</strong> Attributes such as “appealing design” or
+                    “ease of setup” were difficult to translate into measurable engineering parameters.
+                </li>
+                <li>
+                    <strong>Interdependencies between technical characteristics:</strong> The roof matrix revealed
+                    correlations (e.g., processor speed vs. DSP capability), making it challenging to isolate
+                    independent effects.
+                </li>
+                <li>
+                    <strong>Limited availability of competitor data:</strong> Some specifications for Google, Apple, and
+                    Amazon products were estimated or generalized, which may affect benchmarking accuracy.
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 05: RECOMMENDATIONS -->
+        <section id="recommendations" class="content-section">
+            <div class="section-header">
+                <span class="section-index">05</span>
                 <h2>STRATEGIC IMPLICATIONS</h2>
             </div>
+            <p class="recommendations-intro">
+                Recommendations for a <strong>5th generation</strong> Echo Dot, informed by our QFD analysis of the
+                <strong>4th generation</strong>. Amazon’s actual 4th→5th gen changes (larger driver, AZ2 processor,
+                tap controls, temperature/motion sensors) align with these priorities and validate the QFD focus on
+                core performance over cosmetics.
+            </p>
 
             <div class="strategy-grid">
                 <div class="strategy-card priority-high">
@@ -291,6 +334,7 @@
                     <p><strong>Rationale:</strong> Processing power (318 weight) and Voice Rec (243 weight) are the
                         highest priority engineering characteristics. Upgrading the DSP directly improves Sound Quality
                         and Response Time, addressing the top two customer needs.</p>
+                    <p class="strategy-note"><strong>4th→5th gen:</strong> Amazon moved to the AZ2 Neural Edge processor with on-device voice processing for faster, more reliable responses—consistent with this recommendation.</p>
                     <div class="impact-meter">
                         <div class="fill" style="width: 95%"></div>
                     </div>
@@ -298,10 +342,11 @@
                 </div>
 
                 <div class="strategy-card priority-high">
-                    <h3>02. Enhance Microphone Arrays</h3>
+                    <h3>02. Enhance Microphone Arrays & Audio</h3>
                     <p><strong>Rationale:</strong> "Effective Voice Recognition" is a primary need (Rank 9). Moving to a
                         high-sensitivity 4-mic array with advanced noise cancellation is critical for far-field
-                        detection in noisy homes.</p>
+                        detection in noisy homes. Better driver size improves perceived sound quality.</p>
+                    <p class="strategy-note"><strong>4th→5th gen:</strong> 5th gen uses a larger 1.73" driver (vs 1.6" on 4th gen) for improved bass and clarity, and retains a 4-mic far-field array—aligning with QFD priorities.</p>
                     <div class="impact-meter">
                         <div class="fill" style="width: 85%"></div>
                     </div>
@@ -313,17 +358,31 @@
                     <p><strong>Rationale:</strong> Customers equate price with performance. Use the $49.99 price point
                         to deliver superior internal specs (specs > aesthetics) to undercut the $99 HomePod Mini while
                         outperforming the Nest Mini.</p>
+                    <p class="strategy-note"><strong>4th→5th gen:</strong> 5th gen launched at the same $50 price while adding processor and sensor upgrades—reinforcing a performance-first value proposition.</p>
                     <div class="impact-meter">
                         <div class="fill" style="width: 70%"></div>
                     </div>
                     <div class="impact-label"><span>Med Impact</span> // 70%</div>
                 </div>
 
+                <div class="strategy-card">
+                    <h3>04. Add Sensors for UX & Smart Home</h3>
+                    <p><strong>Rationale:</strong> Temperature and motion sensors support smart home routines and
+                        differentiation without sacrificing core performance. Tap gestures (accelerometer) improve
+                        usability and align with “ease of use” and “proper functioning.”</p>
+                    <p class="strategy-note"><strong>4th→5th gen:</strong> 5th gen added built-in temperature and motion sensors and tap-to-control (accelerometer), extending utility while keeping the same compact footprint.</p>
+                    <div class="impact-meter">
+                        <div class="fill" style="width: 60%"></div>
+                    </div>
+                    <div class="impact-label"><span>Med Impact</span> // 60%</div>
+                </div>
+
                 <div class="strategy-card priority-low">
-                    <h3>04. Deprioritize Aesthetics</h3>
+                    <h3>05. Deprioritize Aesthetics</h3>
                     <p><strong>Rationale:</strong> "Color Variety" (Rank 1) and "Appealing Design" (Rank 4) are
                         secondary. Do not allocate major R&D budget here until core functional performance is perfected.
                     </p>
+                    <p class="strategy-note"><strong>4th→5th gen:</strong> 5th gen added color options (e.g. Deep Sea Blue) as a minor differentiator; dimensions stayed the same (100×100×89 mm), consistent with QFD.</p>
                     <div class="impact-meter">
                         <div class="fill" style="width: 30%"></div>
                     </div>

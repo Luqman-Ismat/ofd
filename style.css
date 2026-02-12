@@ -549,19 +549,20 @@ section {
     color: #888;
 }
 
-/* Competitor names in header (Google, Apple, Amazon) */
+/* Competitor names in header (Google, Apple, Amazon) – match table theme */
 .comp-names-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border: none;
     padding: 4px;
-    color: #fff;
+    color: #ddd;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
     align-items: center;
-    background: #151515;
-    border-left: 1px solid #222;
+    background: #0a0a0a;
+    border-left: 2px solid var(--accent);
+    cursor: help;
 }
 
 .comp-names-header span {
@@ -573,41 +574,48 @@ section {
     border-right: none;
 }
 
-/* 4. BOTTOM: Technical Targets + Importance Ratings + Technical Evaluation */
+/* 4. BOTTOM: Technical Targets + Importance Ratings + Technical Evaluation (match table theme) */
 .tech-targets {
     display: grid;
     grid-template-columns: var(--hoq-label-width) repeat(11, var(--hoq-col-width)) var(--hoq-right-width);
-    grid-auto-rows: minmax(44px, auto);
+    grid-auto-rows: minmax(40px, auto);
     margin-top: 0;
-    background: rgba(0, 80, 40, 0.25);
-    border-top: 2px solid #333;
+    background: #0a0a0a;
+    border-top: 2px solid var(--accent);
     width: calc(var(--hoq-label-width) + (11 * var(--hoq-col-width)) + var(--hoq-right-width));
 }
 
 .tech-target-item {
-    padding: 0.5rem 0.4rem;
+    padding: 0.4rem 0.35rem;
     font-size: 0.7rem;
-    color: #bbb;
-    border-right: 1px solid #333;
-    border-bottom: 1px solid #2a2a2a;
+    color: #888;
+    border-right: 1px solid #222;
+    border-bottom: 1px solid #222;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: color 0.2s;
+    cursor: help;
 }
 
 .tech-target-item.tech-spacer {
     border-right: none;
-    background: rgba(0, 0, 0, 0.2);
+    background: #050505;
+    cursor: default;
 }
 
 .tech-target-item:hover {
-    color: #fff;
+    color: #ddd;
 }
 
 .tech-target-item.tech-value {
     font-weight: 500;
+    color: #aaa;
+}
+
+.tech-target-item.tech-value:hover {
+    color: #fff;
 }
 
 .tech-label {
@@ -619,7 +627,7 @@ section {
     padding-right: 1rem;
     font-weight: 700;
     color: var(--accent);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 /* Analysis Readout Popup */
@@ -641,7 +649,42 @@ section {
     font-size: 1rem;
 }
 
+/* --- CHALLENGES FACED --- */
+.challenges-intro {
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 720px;
+}
+
+.challenges-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.challenges-list li {
+    color: #ccc;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+    background: rgba(212, 255, 0, 0.04);
+    padding: 1.25rem 1.5rem 1.25rem 1.5rem;
+}
+
+.challenges-list li strong {
+    color: #fff;
+}
+
 /* --- RECOMMENDATIONS --- */
+.recommendations-intro {
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 820px;
+}
+
 .strategy-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -651,8 +694,23 @@ section {
 .strategy-card {
     background: #111;
     padding: 3.5rem;
-    /* Increased from 2rem */
     border-left: 2px solid #333;
+}
+
+.strategy-card p {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.strategy-note {
+    font-size: 0.85rem !important;
+    color: #888 !important;
+    border-left: 2px solid #333;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0 !important;
 }
 
 .priority-high {

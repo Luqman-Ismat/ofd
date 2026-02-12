@@ -45,13 +45,17 @@ function initVOCChart() {
 
 // 2. Render Mega HoQ (Full Structure)
 function renderHoQ() {
-    // Top Headers (Technical Requirements)
+    // Top Headers: full text (for tooltips + logic), short for display
     const engChars = [
         "Wattage capacity", "Processor speed", "Wi-Fi and Bluetooth",
         "Processor reliability and Software stability", "Amplifier capability",
         "Microphone sensitivity and voice recognition algorithms", "Device dimensions",
         "Exterior materials, finishes, and aesthetic design", "Exterior color and finish options",
         "Material selection and internal components", "Price is proportional to product quality"
+    ];
+    const engCharsShort = [
+        "Wattage cap", "Proc speed", "Wi-Fi/BT", "Reliability", "Amp cap",
+        "Mic & voice", "Dimensions", "Materials", "Colors", "Internals", "Price/qual"
     ];
 
     // Left Headers
@@ -86,17 +90,25 @@ function renderHoQ() {
     // Bottom section: Our Importance Ratings (from QFD calculation)
     const importanceRatings = [43, 174, 133, 318, 167, 243, 14, 50, 45, 111, 230];
 
-    // Target Values (desired specs)
+    // Target Values: [short, full for tooltip]
     const techTargets = [
-        "15 W", "At least 1.6GHz", "2.4/5 GHz and Bluetooth 5.0", "Regular Software Updates",
-        "Has DSP", "At least 3 far-field microphones", "Max Dimension: 100mm",
-        "Plastic and fabric", "At least 4 options", "Durable", "Price Range: $40-$60"
+        ["15 W", "15 W"],
+        ["≥1.6GHz", "At least 1.6GHz"],
+        ["2.4/5 + BT 5.0", "2.4/5 GHz and Bluetooth 5.0"],
+        ["SW updates", "Regular Software Updates"],
+        ["DSP", "Has DSP"],
+        ["3 far-field mics", "At least 3 far-field microphones"],
+        ["≤100mm", "Max Dimension: 100mm"],
+        ["Fabric", "Plastic and fabric"],
+        ["4+ options", "At least 4 options"],
+        ["Durable", "Durable"],
+        ["$40–60", "Price Range: $40–$60"]
     ];
 
-    // Technical Evaluation: Google, Apple, Amazon (per technical requirement)
-    const techEvalGoogle = [15, "1.4", "—", "Yes", "Yes", 3, "98mm", "Plastic and fabric", 4, "Yes", "$99"];
-    const techEvalApple = [20, "1.6", "—", "Yes", "Yes", 4, "99mm", "Plastic and fabric", 5, "Yes", "$49"];
-    const techEvalAmazon = [15, "2", "—", "Yes", "Yes", 4, "100mm", "Plastic and fabric", 4, "Yes", "$49.99"];
+    // Technical Evaluation: [short, tooltip] per requirement (Google, Apple, Amazon)
+    const techEvalGoogle = [[15, "15 W"], ["1.4", "1.4 GHz"], ["—", "—"], ["Yes", "Yes"], ["Yes", "Yes"], [3, "3 mics"], ["98mm", "98mm"], ["Fabric", "Plastic and fabric"], [4, "4 options"], ["Yes", "Yes"], ["$99", "$99"]];
+    const techEvalApple = [[20, "20 W"], ["1.6", "1.6 GHz"], ["—", "—"], ["Yes", "Yes"], ["Yes", "Yes"], [4, "4 mics"], ["99mm", "99mm"], ["Fabric", "Plastic and fabric"], [5, "5 options"], ["Yes", "Yes"], ["$49", "$49"]];
+    const techEvalAmazon = [[15, "15 W"], ["2", "2 GHz"], ["—", "—"], ["Yes", "Yes"], ["Yes", "Yes"], [4, "4 mics"], ["100mm", "100mm"], ["Fabric", "Plastic and fabric"], [4, "4 options"], ["Yes", "Yes"], ["$49.99", "$49.99"]];
 
     // --- RENDER ---
 
@@ -105,16 +117,23 @@ function renderHoQ() {
     // Place a spacer for the first column (Customer Reqs width)
     headerContainer.innerHTML = '<div style="opacity:0"></div>';
 
-    engChars.forEach(char => {
-        // Use WRAPPER structure for hover effects without layout shift
-        headerContainer.innerHTML += `
-            <div class="eng-header-wrapper">
-                <div class="eng-header-content">${char}</div>
-            </div>`;
+    engChars.forEach((char, i) => {
+        const short = engCharsShort[i];
+        const wrapper = document.createElement('div');
+        wrapper.className = 'eng-header-wrapper';
+        const content = document.createElement('div');
+        content.className = 'eng-header-content';
+        content.setAttribute('title', char);
+        content.setAttribute('data-full', char);
+        content.textContent = short;
+        wrapper.appendChild(content);
+        wrapper.addEventListener('mouseenter', () => { content.textContent = char; });
+        wrapper.addEventListener('mouseleave', () => { content.textContent = short; });
+        headerContainer.appendChild(wrapper);
     });
 
-    // Right: Competitor column headers (Google, Apple, Amazon)
-    headerContainer.innerHTML += '<div class="comp-names-header"><span>Google</span><span>Apple</span><span>Amazon</span></div>';
+    // Right: Competitor column headers (Google, Apple, Amazon) with tooltips
+    headerContainer.innerHTML += '<div class="comp-names-header"><span title="Competitor: Google Nest Mini">Google</span><span title="Competitor: Apple HomePod Mini">Apple</span><span title="Competitor: Amazon Echo Dot">Amazon</span></div>';
 
     // 2. Main Grid (Left, Center, Right)
     const custCol = document.getElementById('custReqsCol');
@@ -169,42 +188,42 @@ function renderHoQ() {
         });
     });
 
-    // 3. Bottom Section: Importance Ratings, Target Values, Technical Evaluation
+    // 3. Bottom Section: Importance Ratings, Target Values, Technical Evaluation (short labels + tooltips)
     const techContainer = document.getElementById('techTargets');
     techContainer.innerHTML = '';
 
     // Row 1: Our Importance Ratings
-    techContainer.innerHTML += '<div class="tech-target-item tech-label">Our Importance Ratings</div>';
+    techContainer.innerHTML += '<div class="tech-target-item tech-label" title="Our Importance Ratings">Importance</div>';
     importanceRatings.forEach(val => {
-        techContainer.innerHTML += `<div class="tech-target-item tech-value">${val}</div>`;
+        techContainer.innerHTML += `<div class="tech-target-item tech-value" title="Importance weight">${val}</div>`;
     });
     techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
 
-    // Row 2: Target Values
-    techContainer.innerHTML += '<div class="tech-target-item tech-label">Target Values</div>';
-    techTargets.forEach(target => {
-        techContainer.innerHTML += `<div class="tech-target-item tech-value">${target}</div>`;
+    // Row 2: Target Values (short + full in tooltip)
+    techContainer.innerHTML += '<div class="tech-target-item tech-label" title="Target Values">Targets</div>';
+    techTargets.forEach(([short, full]) => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value" title="${full}">${short}</div>`;
     });
     techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
 
     // Row 3: Technical Evaluation - Google
-    techContainer.innerHTML += '<div class="tech-target-item tech-label">Google</div>';
-    techEvalGoogle.forEach(v => {
-        techContainer.innerHTML += `<div class="tech-target-item tech-value">${v}</div>`;
+    techContainer.innerHTML += '<div class="tech-target-item tech-label" title="Technical Evaluation: Google">Google</div>';
+    techEvalGoogle.forEach(([short, tip]) => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value" title="${tip}">${short}</div>`;
     });
     techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
 
     // Row 4: Technical Evaluation - Apple
-    techContainer.innerHTML += '<div class="tech-target-item tech-label">Apple</div>';
-    techEvalApple.forEach(v => {
-        techContainer.innerHTML += `<div class="tech-target-item tech-value">${v}</div>`;
+    techContainer.innerHTML += '<div class="tech-target-item tech-label" title="Technical Evaluation: Apple">Apple</div>';
+    techEvalApple.forEach(([short, tip]) => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value" title="${tip}">${short}</div>`;
     });
     techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
 
     // Row 5: Technical Evaluation - Amazon
-    techContainer.innerHTML += '<div class="tech-target-item tech-label">Amazon</div>';
-    techEvalAmazon.forEach(v => {
-        techContainer.innerHTML += `<div class="tech-target-item tech-value">${v}</div>`;
+    techContainer.innerHTML += '<div class="tech-target-item tech-label" title="Technical Evaluation: Amazon">Amazon</div>';
+    techEvalAmazon.forEach(([short, tip]) => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value" title="${tip}">${short}</div>`;
     });
     techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
 
