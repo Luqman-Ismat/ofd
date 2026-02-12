@@ -252,18 +252,16 @@ function renderHoQ() {
     // Base Y is the bottom of the SVG viewbox
     const BASE_Y = ROOF_H;
 
-    // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Only upper triangle drawn (j > i).
-    // "Up" = directly up. 0.5 = half-diamond right above each column.
-    // Internals x Price/Qual (9,10) = minus. Right-edge: 6 minus, then (6,10) plus, then 3 minus including (9,10).
-    // Down-left diagonal from tip (0,10): (1,9),(2,8),(3,7),(4,6). On that diagonal, 5 and 7 → (3,7) and (4,6) as +; diamond right below 5 → (5,6) +; right below 7 → (3,6),(4,7) +.
+    // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Matches corrected HOQ roof screenshot.
+    // Main triangle (j<=9): red = delete plus, green = add plus. Right edge (col 10): 6 minus, 1 plus (6,10), 3 minus.
     const roofPlus = new Set([
-        '0,2', '0,3', '1,3', '2,3', '3,4', '4,5',
-        '3,6', '3,7', '4,6', '4,7', '5,6',  // down-left diagonal: (3,7),(4,6) +; below 5: (5,6); below 7: (3,6),(4,7)
-        '6,10', '8,9'
+        '0,2', '0,3', '1,3', '2,3', '3,4',  // kept from original
+        '1,6', '1,8', '1,9', '3,9', '4,8', '4,9', '5,6', '5,7', '5,8', '5,9', '6,7', '6,8',  // green (add)
+        '6,10'  // right edge
     ]);
     const roofMinus = new Set([
         '0,10', '1,10', '2,10', '3,10', '4,10', '5,10',
-        '7,10', '8,10', '9,10'  // Internals x Price/Qual
+        '7,10', '8,10', '9,10'
     ]);
     function getRoofSymbol(i, j) {
         const key = `${i},${j}`;
