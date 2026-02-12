@@ -252,10 +252,21 @@ function renderHoQ() {
     // Base Y is the bottom of the SVG viewbox
     const BASE_Y = ROOF_H;
 
+    // Roof correlation symbols: + (positive), x (strong positive), - (negative)
+    // Pattern from bottom (diff=1) to top (diff=10): mostly +, then mixed +/x/- toward apex
+    function getRoofSymbol(i, j) {
+        const d = j - i;
+        if (d <= 6) return '+';
+        if (d === 7) return (i === 3 ? 'x' : '+');
+        if (d === 8) return (i === 0 ? '+' : i === 1 ? 'x' : '-');
+        if (d === 9) return (i === 0 ? 'x' : '-');
+        if (d === 10) return '-';
+        return '+';
+    }
+
     // Draw Grid Logic
     for (let i = 0; i < NUM_COLS; i++) {
         for (let j = i + 1; j < NUM_COLS; j++) {
-            // Visualize correlations between Col i and Col j
             const xi = (i * COL_W) + (COL_W / 2);
             const xj = (j * COL_W) + (COL_W / 2);
 
@@ -278,33 +289,24 @@ function renderHoQ() {
             diamond.setAttribute("stroke-width", "1");
             svg.appendChild(diamond);
 
-            // Mock Correlations
-            const diff = j - i;
-            let symbol = '';
-            if (diff === 1 && Math.random() > 0.4) symbol = '+';
-            if (diff === 2 && Math.random() > 0.7) symbol = '-';
-            if (diff > 5 && Math.random() > 0.9) symbol = '+';
+            const symbol = getRoofSymbol(i, j);
+            const text = document.createElementNS(svgNS, "text");
+            text.setAttribute("x", cx);
+            text.setAttribute("y", cy + 4);
+            text.setAttribute("text-anchor", "middle");
+            text.setAttribute("fill", symbol === '+' ? "#fff" : symbol === 'x' ? "#fff" : "var(--accent)");
+            text.setAttribute("font-weight", "bold");
+            text.setAttribute("font-size", symbol === 'x' ? "10" : "12");
+            text.textContent = symbol;
+            svg.appendChild(text);
 
-            if (symbol) {
-                const text = document.createElementNS(svgNS, "text");
-                text.setAttribute("x", cx);
-                text.setAttribute("y", cy + 4);
-                text.setAttribute("text-anchor", "middle");
-                text.setAttribute("fill", symbol === '+' ? "#fff" : "var(--accent)");
-                text.setAttribute("font-weight", "bold");
-                text.setAttribute("font-size", "12");
-                text.textContent = symbol;
-                svg.appendChild(text);
-
-                if (symbol === '-') {
-                    diamond.setAttribute("stroke", "var(--accent)");
-                }
-
-                // Add tooltips
-                const title = document.createElementNS(svgNS, "title");
-                title.textContent = symbol === '+' ? "Positive Correlation" : "Negative Correlation";
-                text.appendChild(title);
+            if (symbol === '-') {
+                diamond.setAttribute("stroke", "var(--accent)");
             }
+
+            const title = document.createElementNS(svgNS, "title");
+            title.textContent = symbol === '+' ? "Positive correlation" : symbol === 'x' ? "Strong positive correlation" : "Negative correlation";
+            text.appendChild(title);
         }
     }
 
