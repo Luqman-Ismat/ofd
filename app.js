@@ -25,14 +25,14 @@ function initVOCChart() {
         },
         yAxis: {
             type: 'category',
-            data: ['Price', 'Sound', 'Voice Rec', 'Setup', 'Proper Func', 'Connectivity', 'Volume', 'Design', 'Compact', 'Lightweight', 'Color'],
+            data: ['Color', 'Lightweight', 'Compact', 'Design', 'Volume', 'Connectivity', 'Proper Func', 'Setup', 'Voice Rec', 'Sound', 'Price'],
             axisLabel: { color: '#ddd' }
         },
         series: [
             {
                 name: 'Rank Score',
                 type: 'bar',
-                data: [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
                 itemStyle: { color: '#D4FF00' },
                 barWidth: '50%'
             }
@@ -253,23 +253,17 @@ function renderHoQ() {
     const BASE_Y = ROOF_H;
 
     // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Only upper triangle drawn (j > i).
-    // "Up" = directly up in the diagram. 0.5 = half-diamond right above each column.
-    // Right-edge diagonal: 6 minuses (0,10)–(5,10), then 1 plus (6,10), then 3 minuses (7,10)–(9,10).
-    // Strong Positive (+): 2.5 directly up from WiFi (0,2); 0.5/1.5/2.5 up from Reliability (2,3),(1,3),(0,3); 0.5 up from Amp (3,4) and Mic (4,5); plus (6,10).
+    // "Up" = directly up. 0.5 = half-diamond right above each column.
+    // Internals x Price/Qual (9,10) = minus. Right-edge: 6 minus, then (6,10) plus, then 3 minus including (9,10).
+    // Down-left diagonal from tip (0,10): (1,9),(2,8),(3,7),(4,6). On that diagonal, 5 and 7 → (3,7) and (4,6) as +; diamond right below 5 → (5,6) +; right below 7 → (3,6),(4,7) +.
     const roofPlus = new Set([
-        '0,2',   // 2.5 directly up from Wi-Fi col
-        '0,3',   // 2.5 directly up from Reliability col
-        '1,3',   // 1.5 directly up from Reliability col
-        '2,3',   // 0.5 (half-diamond) above Reliability col
-        '3,4',   // 0.5 (half-diamond) above Amp cap col
-        '4,5',   // 0.5 (half-diamond) above Mic & voice col
-        '6,10',  // after 6 minuses on right edge
-        '8,9', '9,10'
+        '0,2', '0,3', '1,3', '2,3', '3,4', '4,5',
+        '3,6', '3,7', '4,6', '4,7', '5,6',  // down-left diagonal: (3,7),(4,6) +; below 5: (5,6); below 7: (3,6),(4,7)
+        '6,10', '8,9'
     ]);
-    // Negative (-): 6 on right edge (0,10)–(5,10), then 3 more (7,10)–(9,10).
     const roofMinus = new Set([
         '0,10', '1,10', '2,10', '3,10', '4,10', '5,10',
-        '7,10', '8,10', '9,10'
+        '7,10', '8,10', '9,10'  // Internals x Price/Qual
     ]);
     function getRoofSymbol(i, j) {
         const key = `${i},${j}`;
