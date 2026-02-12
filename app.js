@@ -253,17 +253,18 @@ function renderHoQ() {
     const BASE_Y = ROOF_H;
 
     // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Only upper triangle drawn (j > i).
-    // Right-edge diagonal (col 10): 6 minuses (0,10)–(5,10), then 1 plus (6,10), then 3 minuses (7,10)–(9,10).
-    // Strong Positive (+): no Watt/Proc, Proc/WiFi, or Materials/Colors; plus 2.5 up from WiFi (0,2), 1.5 & 2.5 up from Reliability (2,3),(1,3), 0.5 up from Amp (3,4), 0.5 up from Mic (4,5); plus (6,10).
+    // "Up" = directly up in the diagram. 0.5 = half-diamond right above each column.
+    // Right-edge diagonal: 6 minuses (0,10)–(5,10), then 1 plus (6,10), then 3 minuses (7,10)–(9,10).
+    // Strong Positive (+): 2.5 directly up from WiFi (0,2); 0.5/1.5/2.5 up from Reliability (2,3),(1,3),(0,3); 0.5 up from Amp (3,4) and Mic (4,5); plus (6,10).
     const roofPlus = new Set([
-        '0,2',   // 2.5 up from Wi-Fi col: Wattage x Wi-Fi/BT
-        '1,3',   // 2.5 up from Reliability: Proc Speed x Reliability
-        '2,3',   // 1.5 up from Reliability: Wi-Fi/BT x Reliability
-        '3,4',   // 0.5 up from Amp cap: Reliability x Amp Cap
-        '4,5',   // 0.5 up from Mic & voice: Amp Cap x Mic & Voice
-        '6,10',  // after 6 minuses on right edge: Dimensions x Price/Qual
-        '8,9',   // Colors x Internals
-        '9,10'   // Internals x Price/Qual
+        '0,2',   // 2.5 directly up from Wi-Fi col
+        '0,3',   // 2.5 directly up from Reliability col
+        '1,3',   // 1.5 directly up from Reliability col
+        '2,3',   // 0.5 (half-diamond) above Reliability col
+        '3,4',   // 0.5 (half-diamond) above Amp cap col
+        '4,5',   // 0.5 (half-diamond) above Mic & voice col
+        '6,10',  // after 6 minuses on right edge
+        '8,9', '9,10'
     ]);
     // Negative (-): 6 on right edge (0,10)–(5,10), then 3 more (7,10)–(9,10).
     const roofMinus = new Set([
