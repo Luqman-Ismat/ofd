@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QFD: Echo Dot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav">
+        <div class="nav-logo">QFD // 2026</div>
+        <ul class="nav-links">
+            <li><a href="#hero">00 // INTRO</a></li>
+            <li><a href="#cust-reqs">01 // CUSTOMER</a></li>
+            <li><a href="#competitors">02 // MARKET</a></li>
+            <li><a href="#hoq-section">03 // HOQ ANALYSIS</a></li>
+            <li><a href="#recommendations">04 // STRATEGY</a></li>
+        </ul>
+        <div class="nav-progress"></div>
+    </nav>
+
+    <main class="scroller">
+
+        <!-- SECTION 00: HERO -->
+        <section id="hero" class="hero-section">
+            <div class="hero-grid">
+                <div class="hero-header">
+                    <h1 class="glitch-text" data-text="QFD: ECHO DOT">QFD: ECHO DOT</h1>
+                    <div class="hero-sub">
+                        <span>OPERATION CONTROL</span>
+                    </div>
+                </div>
+                <div class="hero-meta">
+                    <h2>Quality Function Deployment: Amazon Echo Dot</h2>
+                    <p class="summary-text">
+                        A comprehensive engineering analysis translating subjective Voice of Customer (VOC) data into
+                        quantifiable technical design objectives using the House of Quality methodology.
+                    </p>
+                    <div class="team-list">
+                        <span>Paola Salinas Gil</span>
+                        <span>Alexandra Bayona</span>
+                        <span>Miguel A. Rodriguez</span>
+                        <span>Luqman Ismat</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">SCROLL TO BEGIN</div>
+        </section>
+
+        <!-- SECTION 01: CUSTOMER REQS -->
+        <section id="cust-reqs" class="content-section">
+            <div class="section-header">
+                <span class="section-index">01</span>
+                <h2>VOICE OF CUSTOMER</h2>
+            </div>
+
+            <div class="two-col-layout">
+                <div class="text-col">
+                    <h3>Methodology</h3>
+                    <p>
+                        We collected customer feedback by randomly selecting reviews (N=XX) from Amazon’s website,
+                        spanning 1-5 star ratings. This qualitative data was synthesized into distinct customer needs
+                        and ranked by frequency and importance.
+                    </p>
+
+                    <div class="data-table-styled">
+                        <div class="dt-row header">
+                            <span>Requirement</span>
+                            <span>Rank</span>
+                            <span>Prioritization</span>
+                        </div>
+                        <div class="dt-row">
+                            <span>Price Point</span>
+                            <span class="rank-high">11</span>
+                            <span>Primary</span>
+                        </div>
+                        <div class="dt-row">
+                            <span>Sound Quality</span>
+                            <span class="rank-high">10</span>
+                            <span>Primary</span>
+                        </div>
+                        <div class="dt-row">
+                            <span>Effective Voice Rec.</span>
+                            <span class="rank-high">9</span>
+                            <span>Primary</span>
+                        </div>
+                        <div class="dt-row">
+                            <span>Ease of Setup</span>
+                            <span class="rank-mid">8</span>
+                            <span>Primary</span>
+                        </div>
+                        <div class="dt-row">
+                            <span>Connectivity</span>
+                            <span class="rank-mid">6</span>
+                            <span>Primary</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="visual-col">
+                    <div id="vocChart" class="chart-box"></div>
+                    <div class="key-insight-box">
+                        <h4>Key Insight</h4>
+                        <p>Customers overwhelmingly prioritize <strong>Functional Performance</strong> (Sound, Voice
+                            Rec) over <strong>Aesthetics</strong> (Color, Design). Design efforts must focus on internal
+                            components like DSP and Mics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 02: COMPETITORS -->
+        <section id="competitors" class="content-section">
+            <div class="section-header">
+                <span class="section-index">02</span>
+                <h2>COMPETITIVE BENCHMARKING</h2>
+            </div>
+
+            <div class="competitor-swipecards">
+                <!-- Amazon -->
+                <div class="comp-card expanded">
+                    <div class="comp-header">
+                        <h3>AMAZON ECHO DOT</h3>
+                        <span class="price-tag">$49.99</span>
+                    </div>
+                    <div class="comp-specs">
+                        <div class="spec-item">
+                            <label>Driver</label>
+                            <span>1.73" (44mm) Front-firing</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Processor</label>
+                            <span>AZ2 Neural Edge</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Mics</label>
+                            <span>4-mic Array (Far-field)</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Dimensions</label>
+                            <span>100mm x 100mm x 89mm</span>
+                        </div>
+                    </div>
+                    <p class="comp-desc">
+                        Runs Alexa on dedicated smart-speaker OS. The AZ2 processor offloads voice processing locally
+                        for faster response times. Uses a plastic/fabric spherical design.
+                    </p>
+                </div>
+
+                <!-- Google -->
+                <div class="comp-card">
+                    <div class="comp-header">
+                        <h3>GOOGLE NEST MINI</h3>
+                        <span class="price-tag">$49.00</span>
+                    </div>
+                    <div class="comp-specs">
+                        <div class="spec-item">
+                            <label>Driver</label>
+                            <span>40mm (1.58")</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Processor</label>
+                            <span>Quad-core 64-bit ARM 1.4GHz</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Mics</label>
+                            <span>3-mic Far-field</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Dimensions</label>
+                            <span>98mm x 42mm (Puck)</span>
+                        </div>
+                    </div>
+                    <p class="comp-desc">
+                        Stable platform with Voice Match and ML hardware engine. Tuned for 360° sound but limited by
+                        smaller "puck" form factor.
+                    </p>
+                </div>
+
+                <!-- Apple -->
+                <div class="comp-card">
+                    <div class="comp-header">
+                        <h3>APPLE HOMEPOD MINI</h3>
+                        <span class="price-tag">$99.00</span>
+                    </div>
+                    <div class="comp-specs">
+                        <div class="spec-item">
+                            <label>Driver</label>
+                            <span>Full-range + 2 Passive Radiators</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Processor</label>
+                            <span>Apple S5 SiP</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Connectivity</label>
+                            <span>Thread + U1 Ultra-wideband</span>
+                        </div>
+                        <div class="spec-item">
+                            <label>Dimensions</label>
+                            <span>84mm x 99mm</span>
+                        </div>
+                    </div>
+                    <p class="comp-desc">
+                        Premium pricing justified by advanced "Computational Audio" (S5 Chip) and deep ecosystem
+                        integration (Handoff, Intercom).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 03: HOUSE OF QUALITY -->
+        <section id="hoq-section" class="wide-section">
+            <div class="section-header centered">
+                <span class="section-index">03</span>
+                <h2>HOUSE OF QUALITY ANALYSIS</h2>
+            </div>
+
+            <div class="hoq-controls">
+                <p>Interactive Matrix: Hover matrix correlations to see engineering logic.</p>
+                <div class="legend">
+                    <span><strong style="color:var(--accent)">●</strong> Strong (9)</span>
+                    <span><strong>○</strong> Moderate (3)</span>
+                    <span><strong>△</strong> Weak (1)</span>
+                </div>
+            </div>
+
+            <!-- The Matrix Container -->
+            <div class="hoq-mega-container" id="hoqMegaContainer">
+
+                <!-- Roof (Correlations) -->
+                <div class="hoq-roof-container" id="hoqRoof">
+                    <!-- JS Injected (SVG) -->
+                </div>
+
+                <!-- Headers (Engineering Characteristics) -->
+                <div class="eng-headers" id="engHeaders">
+                    <!-- JS Injected -->
+                </div>
+
+                <!-- Main Grid -->
+                <div class="main-matrix-grid">
+                    <!-- Left: Customer Requirements -->
+                    <div class="cust-reqs-col" id="custReqsCol">
+                        <!-- JS Injected -->
+                    </div>
+
+                    <!-- Center: Relationship & Correlations -->
+                    <div class="matrix-core" id="matrixCore">
+                        <!-- JS Injected -->
+                    </div>
+
+                    <!-- Right: Customer Assessment -->
+                    <div class="cust-assess-col" id="custAssessCol">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+                <!-- Bottom: Technical Targets -->
+                <div class="tech-targets" id="techTargets">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+
+            <div class="analysis-readout" id="analysisReadout">
+                <h4>Correlation Logic</h4>
+                <div id="logicText">Hover over a connection point to see the engineering justification derived from the
+                    report.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 04: RECOMMENDATIONS -->
+        <section id="recommendations" class="content-section">
+            <div class="section-header">
+                <span class="section-index">04</span>
+                <h2>STRATEGIC IMPLICATIONS</h2>
+            </div>
+
+            <div class="strategy-grid">
+                <div class="strategy-card priority-high">
+                    <h3>01. Upgrade DSP & Processing</h3>
+                    <p><strong>Rationale:</strong> Processing power (318 weight) and Voice Rec (243 weight) are the
+                        highest priority engineering characteristics. Upgrading the DSP directly improves Sound Quality
+                        and Response Time, addressing the top two customer needs.</p>
+                    <div class="impact-meter">
+                        <div class="fill" style="width: 95%"></div>
+                    </div>
+                    <div class="impact-label"><span>High Impact</span> // 95%</div>
+                </div>
+
+                <div class="strategy-card priority-high">
+                    <h3>02. Enhance Microphone Arrays</h3>
+                    <p><strong>Rationale:</strong> "Effective Voice Recognition" is a primary need (Rank 9). Moving to a
+                        high-sensitivity 4-mic array with advanced noise cancellation is critical for far-field
+                        detection in noisy homes.</p>
+                    <div class="impact-meter">
+                        <div class="fill" style="width: 85%"></div>
+                    </div>
+                    <div class="impact-label"><span>High Impact</span> // 85%</div>
+                </div>
+
+                <div class="strategy-card">
+                    <h3>03. Value-Aligned Pricing</h3>
+                    <p><strong>Rationale:</strong> Customers equate price with performance. Use the $49.99 price point
+                        to deliver superior internal specs (specs > aesthetics) to undercut the $99 HomePod Mini while
+                        outperforming the Nest Mini.</p>
+                    <div class="impact-meter">
+                        <div class="fill" style="width: 70%"></div>
+                    </div>
+                    <div class="impact-label"><span>Med Impact</span> // 70%</div>
+                </div>
+
+                <div class="strategy-card priority-low">
+                    <h3>04. Deprioritize Aesthetics</h3>
+                    <p><strong>Rationale:</strong> "Color Variety" (Rank 1) and "Appealing Design" (Rank 4) are
+                        secondary. Do not allocate major R&D budget here until core functional performance is perfected.
+                    </p>
+                    <div class="impact-meter">
+                        <div class="fill" style="width: 30%"></div>
+                    </div>
+                    <div class="impact-label">Low Impact // 30%</div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="final-footer">
+            <p>INDE 4372 // SPRING 2026 // QFD REPORT FINAL</p>
+        </footer>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
