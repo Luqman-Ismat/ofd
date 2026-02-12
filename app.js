@@ -252,13 +252,16 @@ function renderHoQ() {
     // Base Y is the bottom of the SVG viewbox
     const BASE_Y = ROOF_H;
 
-    // Roof correlation symbols from cell data (indices 0-based: i,j = 0..10)
-    // + cells: (1,2),(1,3),(2,3),(2,4),(4,5),(5,6),(8,9),(9,10),(10,11) → (10,11) prioritized as +
-    // - cells: (6,11),(7,11),(8,11),(9,11) + top diagonal edge: 6× '-' descending from peak → (1,11)..(6,11)
-    const roofPlus = new Set(['0,1', '0,2', '1,2', '1,3', '3,4', '4,5', '7,8', '8,9', '9,10']);
+    // Roof: cell (i,j) = correlation between Requirement[i+1] and Requirement[j+1] (Cols 1–11, 0-based i,j).
+    // 1. Negative diagonal (right edge): Col 11 with Cols 1–9 → (0,10),(1,10),..,(8,10).
+    // 2. Row 0 (adjacent cols): (1,2),(2,3),(4,5),(5,6),(8,9),(9,10),(10,11) → (0,1),(1,2),(3,4),(4,5),(7,8),(8,9),(9,10).
+    // 3. Row 1 (one level up): (1,3),(2,4) → (0,2),(1,3).
+    const roofPlus = new Set([
+        '0,1', '1,2', '3,4', '4,5', '7,8', '8,9', '9,10',  // Row 0
+        '0,2', '1,3'                                        // Row 1
+    ]);
     const roofMinus = new Set([
-        '0,10', '1,10', '2,10', '3,10', '4,10', '5,10',  // top diagonal edge (6 minus markers)
-        '6,10', '7,10', '8,10'                           // (6,11),(7,11),(8,11),(9,11)
+        '0,10', '1,10', '2,10', '3,10', '4,10', '5,10', '6,10', '7,10', '8,10'  // Col 11 with Cols 1–9
     ]);
     function getRoofSymbol(i, j) {
         const key = `${i},${j}`;

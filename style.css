@@ -196,6 +196,27 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
+    align-items: stretch;
+}
+
+.visual-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 0;
+}
+
+.visual-col .chart-box {
+    flex: 1;
+    min-height: 380px;
+}
+
+.visual-col .key-insight-box {
+    flex: 1;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .text-col h3 {
@@ -262,7 +283,18 @@ section {
     background: var(--accent-dim);
     border-left: 4px solid var(--accent);
     padding: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 0;
+}
+
+.key-insight-box h4 {
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+.key-insight-box p {
+    margin: 0;
+    color: #ccc;
+    line-height: 1.6;
 }
 
 /* --- COMPETITOR CARDS --- */
@@ -277,6 +309,28 @@ section {
     border: 1px solid var(--border);
     padding: 2rem;
     transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.comp-product-img-wrap {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.comp-product-img-wrap img {
+    max-height: 100%;
+    max-width: 140px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    filter: brightness(1.05);
 }
 
 .comp-card:hover {
