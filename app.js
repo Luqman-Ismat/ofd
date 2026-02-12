@@ -252,16 +252,23 @@ function renderHoQ() {
     // Base Y is the bottom of the SVG viewbox
     const BASE_Y = ROOF_H;
 
-    // Roof: cell (i,j) = correlation between Requirement[i+1] and Requirement[j+1] (Cols 1–11, 0-based i,j).
-    // 1. Negative diagonal (right edge): Col 11 with Cols 1–9 → (0,10),(1,10),..,(8,10).
-    // 2. Row 0 (adjacent cols): (1,2),(2,3),(4,5),(5,6),(8,9),(9,10),(10,11) → (0,1),(1,2),(3,4),(4,5),(7,8),(8,9),(9,10).
-    // 3. Row 1 (one level up): (1,3),(2,4) → (0,2),(1,3).
+    // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Only upper triangle drawn (j > i).
+    // Strong Positive (+): specific column pairs.
     const roofPlus = new Set([
-        '0,1', '1,2', '3,4', '4,5', '7,8', '8,9', '9,10',  // Row 0
-        '0,2', '1,3'                                        // Row 1
+        '0,1',   // Wattage Cap x Proc Speed
+        '0,2',   // Wattage Cap x Wi-Fi/BT
+        '1,2',   // Proc Speed x Wi-Fi/BT
+        '1,3',   // Proc Speed x Reliability
+        '2,3',   // Wi-Fi/BT x Reliability
+        '3,4',   // Reliability x Amp Cap
+        '4,5',   // Amp Cap x Mic & Voice
+        '7,8',   // Materials x Colors
+        '8,9',   // Colors x Internals
+        '9,10'   // Internals x Price/Qual
     ]);
+    // Negative (-): Price/Qual (col 10) with every column from Wattage Cap (0) down to Mic & Voice (5) — right-edge diagonal.
     const roofMinus = new Set([
-        '0,10', '1,10', '2,10', '3,10', '4,10', '5,10', '6,10', '7,10', '8,10'  // Col 11 with Cols 1–9
+        '0,10', '1,10', '2,10', '3,10', '4,10', '5,10'
     ]);
     function getRoofSymbol(i, j) {
         const key = `${i},${j}`;
