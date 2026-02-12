@@ -45,14 +45,14 @@ function initVOCChart() {
 
 // 2. Render Mega HoQ (Full Structure)
 function renderHoQ() {
-    // Top Headers
+    // Top Headers (Technical Requirements)
     const engChars = [
-        "Wage Cap", "Proc Speed", "Wi-Fi/BT",
-        "Reliability", "Amp Cap",
-        "Mic Sens", "Dimensions",
-        "Materials", "Colors",
-        "Internals", "Price/Qual"
-    ]; // Shortened for display
+        "Wattage capacity", "Processor speed", "Wi-Fi and Bluetooth",
+        "Processor reliability and Software stability", "Amplifier capability",
+        "Microphone sensitivity and voice recognition algorithms", "Device dimensions",
+        "Exterior materials, finishes, and aesthetic design", "Exterior color and finish options",
+        "Material selection and internal components", "Price is proportional to product quality"
+    ];
 
     // Left Headers
     const custReqs = [
@@ -83,12 +83,20 @@ function renderHoQ() {
         ['G', 'G', 'G'], ['G', 'G', 'G'], ['G', 'P', 'G']
     ];
 
-    // Bottom: Technical Targets
+    // Bottom section: Our Importance Ratings (from QFD calculation)
+    const importanceRatings = [43, 174, 133, 318, 167, 243, 14, 50, 45, 111, 230];
+
+    // Target Values (desired specs)
     const techTargets = [
-        "15 W", ">1.6GHz", "BT 5.0", "Updates",
-        "DSP Included", "3 Far-field", "100mm",
-        "Fabric/Plastic", "4+ Colors", "Durable", "$50"
+        "15 W", "At least 1.6GHz", "2.4/5 GHz and Bluetooth 5.0", "Regular Software Updates",
+        "Has DSP", "At least 3 far-field microphones", "Max Dimension: 100mm",
+        "Plastic and fabric", "At least 4 options", "Durable", "Price Range: $40-$60"
     ];
+
+    // Technical Evaluation: Google, Apple, Amazon (per technical requirement)
+    const techEvalGoogle = [15, "1.4", "—", "Yes", "Yes", 3, "98mm", "Plastic and fabric", 4, "Yes", "$99"];
+    const techEvalApple = [20, "1.6", "—", "Yes", "Yes", 4, "99mm", "Plastic and fabric", 5, "Yes", "$49"];
+    const techEvalAmazon = [15, "2", "—", "Yes", "Yes", 4, "100mm", "Plastic and fabric", 4, "Yes", "$49.99"];
 
     // --- RENDER ---
 
@@ -105,8 +113,8 @@ function renderHoQ() {
             </div>`;
     });
 
-    // Right spacer for Competitive Assessment width
-    headerContainer.innerHTML += '<div style="border:none; padding:10px; color:#fff; font-size:0.8rem; font-weight:bold; display:flex; align-items:center;">MARKET<br>COMP.</div>';
+    // Right: Competitor column headers (Google, Apple, Amazon)
+    headerContainer.innerHTML += '<div class="comp-names-header"><span>Google</span><span>Apple</span><span>Amazon</span></div>';
 
     // 2. Main Grid (Left, Center, Right)
     const custCol = document.getElementById('custReqsCol');
@@ -161,17 +169,44 @@ function renderHoQ() {
         });
     });
 
-    // 3. Technical Targets (Bottom)
+    // 3. Bottom Section: Importance Ratings, Target Values, Technical Evaluation
     const techContainer = document.getElementById('techTargets');
-    techContainer.innerHTML = '<div class="tech-target-item tech-label">TARGET VALUES</div>'; // Label
-    techTargets.forEach(target => {
-        // Use SAME wrapper structure as top headers for consistency & pop-up effect
-        techContainer.innerHTML += `
-            <div class="eng-header-wrapper">
-                <div class="eng-header-content" style="height:100%; justify-content:flex-end;">${target}</div>
-            </div>`;
+    techContainer.innerHTML = '';
+
+    // Row 1: Our Importance Ratings
+    techContainer.innerHTML += '<div class="tech-target-item tech-label">Our Importance Ratings</div>';
+    importanceRatings.forEach(val => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value">${val}</div>`;
     });
-    techContainer.innerHTML += '<div></div>'; // Right spacer
+    techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
+
+    // Row 2: Target Values
+    techContainer.innerHTML += '<div class="tech-target-item tech-label">Target Values</div>';
+    techTargets.forEach(target => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value">${target}</div>`;
+    });
+    techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
+
+    // Row 3: Technical Evaluation - Google
+    techContainer.innerHTML += '<div class="tech-target-item tech-label">Google</div>';
+    techEvalGoogle.forEach(v => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value">${v}</div>`;
+    });
+    techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
+
+    // Row 4: Technical Evaluation - Apple
+    techContainer.innerHTML += '<div class="tech-target-item tech-label">Apple</div>';
+    techEvalApple.forEach(v => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value">${v}</div>`;
+    });
+    techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
+
+    // Row 5: Technical Evaluation - Amazon
+    techContainer.innerHTML += '<div class="tech-target-item tech-label">Amazon</div>';
+    techEvalAmazon.forEach(v => {
+        techContainer.innerHTML += `<div class="tech-target-item tech-value">${v}</div>`;
+    });
+    techContainer.innerHTML += '<div class="tech-target-item tech-spacer"></div>';
 
     // 5. Roof (SVG Correlation Matrix)
     const roofContainer = document.getElementById('hoqRoof');

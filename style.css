@@ -549,32 +549,65 @@ section {
     color: #888;
 }
 
-/* 4. BOTTOM: Technical Targets */
+/* Competitor names in header (Google, Apple, Amazon) */
+.comp-names-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: none;
+    padding: 4px;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    background: #151515;
+    border-left: 1px solid #222;
+}
+
+.comp-names-header span {
+    border-right: 1px solid #222;
+    padding: 0.5rem 0;
+}
+
+.comp-names-header span:last-child {
+    border-right: none;
+}
+
+/* 4. BOTTOM: Technical Targets + Importance Ratings + Technical Evaluation */
 .tech-targets {
     display: grid;
     grid-template-columns: var(--hoq-label-width) repeat(11, var(--hoq-col-width)) var(--hoq-right-width);
+    grid-auto-rows: minmax(44px, auto);
     margin-top: 0;
-    background: #111;
+    background: rgba(0, 80, 40, 0.25);
     border-top: 2px solid #333;
     width: calc(var(--hoq-label-width) + (11 * var(--hoq-col-width)) + var(--hoq-right-width));
 }
 
 .tech-target-item {
-    padding: 1rem;
+    padding: 0.5rem 0.4rem;
     font-size: 0.7rem;
-    color: #aaa;
+    color: #bbb;
     border-right: 1px solid #333;
-    height: 100px;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    text-align: left;
+    border-bottom: 1px solid #2a2a2a;
+    text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
     transition: color 0.2s;
+}
+
+.tech-target-item.tech-spacer {
+    border-right: none;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .tech-target-item:hover {
     color: #fff;
+}
+
+.tech-target-item.tech-value {
+    font-weight: 500;
 }
 
 .tech-label {
@@ -583,9 +616,10 @@ section {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 1.5rem;
+    padding-right: 1rem;
     font-weight: 700;
     color: var(--accent);
+    font-size: 0.8rem;
 }
 
 /* Analysis Readout Popup */
