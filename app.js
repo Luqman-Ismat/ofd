@@ -253,22 +253,22 @@ function renderHoQ() {
     const BASE_Y = ROOF_H;
 
     // Roof: (i,j) = correlation between eng char i and eng char j (0-based). Only upper triangle drawn (j > i).
-    // Strong Positive (+): specific column pairs.
+    // Right-edge diagonal (col 10): 6 minuses (0,10)–(5,10), then 1 plus (6,10), then 3 minuses (7,10)–(9,10).
+    // Strong Positive (+): no Watt/Proc, Proc/WiFi, or Materials/Colors; plus 2.5 up from WiFi (0,2), 1.5 & 2.5 up from Reliability (2,3),(1,3), 0.5 up from Amp (3,4), 0.5 up from Mic (4,5); plus (6,10).
     const roofPlus = new Set([
-        '0,1',   // Wattage Cap x Proc Speed
-        '0,2',   // Wattage Cap x Wi-Fi/BT
-        '1,2',   // Proc Speed x Wi-Fi/BT
-        '1,3',   // Proc Speed x Reliability
-        '2,3',   // Wi-Fi/BT x Reliability
-        '3,4',   // Reliability x Amp Cap
-        '4,5',   // Amp Cap x Mic & Voice
-        '7,8',   // Materials x Colors
+        '0,2',   // 2.5 up from Wi-Fi col: Wattage x Wi-Fi/BT
+        '1,3',   // 2.5 up from Reliability: Proc Speed x Reliability
+        '2,3',   // 1.5 up from Reliability: Wi-Fi/BT x Reliability
+        '3,4',   // 0.5 up from Amp cap: Reliability x Amp Cap
+        '4,5',   // 0.5 up from Mic & voice: Amp Cap x Mic & Voice
+        '6,10',  // after 6 minuses on right edge: Dimensions x Price/Qual
         '8,9',   // Colors x Internals
         '9,10'   // Internals x Price/Qual
     ]);
-    // Negative (-): Price/Qual (col 10) with every column from Wattage Cap (0) down to Mic & Voice (5) — right-edge diagonal.
+    // Negative (-): 6 on right edge (0,10)–(5,10), then 3 more (7,10)–(9,10).
     const roofMinus = new Set([
-        '0,10', '1,10', '2,10', '3,10', '4,10', '5,10'
+        '0,10', '1,10', '2,10', '3,10', '4,10', '5,10',
+        '7,10', '8,10', '9,10'
     ]);
     function getRoofSymbol(i, j) {
         const key = `${i},${j}`;
